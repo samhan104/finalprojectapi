@@ -6,3 +6,5 @@ CREATE TABLE discordquestions(
     answer VARCHAR(255),
     answer_choices text[]
 );
+
+-- INSERT INTO discordquestions ( question, answer, answer_choices) VALUES ( 'How do you connect your github repository locally?', 'git clone [quick setup SSH]', ARRAY ['git copy [quick setup SSH]','git clone [quick setup SSH]']);
