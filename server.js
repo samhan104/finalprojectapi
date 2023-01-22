@@ -8,7 +8,7 @@ app.use(cors())
 
 
 //create
-app.post('/quizbotapi', async (req,res) => {
+app.post('/', async (req,res) => {
     try {
         const { question, answer, answer_choices} = req.body;
         const newQuestions = await pool.query("INSERT INTO discordquestions (question, answer, answer_choices) VALUES($1, $2, $3) RETURNING *",
@@ -21,7 +21,7 @@ app.post('/quizbotapi', async (req,res) => {
 })
 
 //read all
-app.get('/quizbotapi', async (req,res) =>{
+app.get('/', async (req,res) =>{
     try {
         const allQuestions = await pool.query("SELECT * FROM discordquestions");
         res.json(allQuestions.rows);
@@ -31,7 +31,7 @@ app.get('/quizbotapi', async (req,res) =>{
 })
 
 //read one
-app.get('/quizbotapi/:id', async(req,res) => {
+app.get('/:id', async(req,res) => {
     try {
         const {id} = req.params;
         const oneQuestion = await pool.query("SELECT * FROM discordquestions WHERE question_id = $1", [id]);
@@ -43,7 +43,7 @@ app.get('/quizbotapi/:id', async(req,res) => {
 })
 
 //update
-app.put("/quizbotapi/:id", async(req,res) => {
+app.put("/:id", async(req,res) => {
     try {
         const {id} = req.params;
         const {question, answer, answer_choices} = req.body;
@@ -57,7 +57,7 @@ app.put("/quizbotapi/:id", async(req,res) => {
 })
 
 //delete
-app.delete('/quizbotapi/:id', async (req,res) =>{
+app.delete('/:id', async (req,res) =>{
     try {
         const {id } =req.params;
         const deleteTodo = await pool.query("DELETE FROM discordquestions WHERE question_id = $1", 
