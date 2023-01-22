@@ -5,7 +5,7 @@ const pool = require("./db.js")
 const postgres = require('./postgres')
 
 app.use(express.json())
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use(cors())
 
 
