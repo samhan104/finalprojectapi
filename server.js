@@ -1,8 +1,8 @@
 const express = require("express")
 const app = express()
 const cors = require('cors')
-const pool = require("./db.js")
-const postgres = require('./postgres')
+// const pool = require("./db.js")
+const pool = require('./postgres')
 
 app.use(express.json())
 app.use(express.static('public'))
@@ -71,7 +71,7 @@ app.delete('/discord/:id', async (req,res) =>{
     }
 })
 
-postgres.connect();
+pool.connect();
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("online")
