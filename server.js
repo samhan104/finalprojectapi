@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require('cors')
 const pool = require("./db.js")
+const postgres = require('./postgres')
 
 app.use(express.json())
 app.use(cors())
@@ -68,6 +69,8 @@ app.delete('/:id', async (req,res) =>{
         console.log(err.message);
     }
 })
+
+postgres.connect();
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("online")
