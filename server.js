@@ -13,8 +13,8 @@ app.use(cors())
 app.post('/discord', async (req,res) => {
     try {
         const { question, answer, answer_choices} = req.body;
-        const newQuestions = await pool.query("INSERT INTO discordquestions (question, answer, answer_choices) VALUES($1, $2, $3) RETURNING *",
-        [question, answer, answer_choices]);
+        const newQuestions = await pool.query("INSERT INTO discordquestions (question, answer) VALUES($1, $2) RETURNING *",
+        [question, answer]);
 
         res.json(newQuestions.rows);
     } catch (err) {
@@ -49,8 +49,8 @@ app.put("/discord/:id", async(req,res) => {
     try {
         const {id} = req.params;
         const {question, answer, answer_choices} = req.body;
-        const updateQuestions = await pool.query("UPDATE discordquestions SET question = $1, answer = $2, answer_choices = $3 WHERE question_id = $4",
-        [question, answer, answer_choices, id]);
+        const updateQuestions = await pool.query("UPDATE discordquestions SET question = $1, answer = $2 WHERE question_id = $3",
+        [question, answer, id]);
 
         res.json("Updated Successfully");
     } catch (err) {
